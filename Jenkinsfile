@@ -29,7 +29,10 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                sh 'poetry run pytest'
+                sh '''
+                export PYTHONPATH=$PYTHONPATH:$(pwd)
+                poetry run pytest
+                '''
             }
         }
     }
