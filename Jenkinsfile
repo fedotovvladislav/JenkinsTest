@@ -1,10 +1,23 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "$HOME/.local/bin:$PATH"
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/fedotovvladislav/JenkinsTest.git'
+            }
+        }
+
+        stage('Install Poetry') {
+            steps {
+                sh '''
+                curl -sSL https://install.python-poetry.org | python3 -
+                poetry --version
+                '''
             }
         }
 
