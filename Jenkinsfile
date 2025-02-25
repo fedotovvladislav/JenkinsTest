@@ -4,20 +4,19 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/fedotovvladislav/JenkinsTest.git'
+                git branch: 'main', url: 'https://github.com/fedotovvladislav/JenkinsTest.git'
             }
         }
 
         stage('Install dependencies') {
             steps {
-                sh 'python3 -m venv venv'
-                sh 'source venv/bin/activate && pip install -r requirements.txt'
+                sh 'poetry install --no-root'
             }
         }
 
         stage('Run tests') {
             steps {
-                sh 'source venv/bin/activate && pytest'
+                sh 'poetry run pytest'
             }
         }
     }
