@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                 curl -sSL https://install.python-poetry.org | python3 -
-                export PATH="$HOME/.local/bin:$PATH"
+                export PATH="/var/lib/jenkins/.local/bin:$PATH"
                 poetry --version
                 '''
             }
